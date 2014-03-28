@@ -12,8 +12,10 @@ RUN wget -q -O - http://debian.datastax.com/debian/repo_key | apt-key add -
 RUN apt-get update
 RUN apt-get install -yq dsc12=1.2.15-1 cassandra=1.2.15
 
-VOLUME ["/var/lib/cassandra", "/var/log/cassandra"]
+RUN sed -i -e "s/^rpc_address.*/rpc_address: 0.0.0.0/" /etc/cassandra/cassandra.yaml
 
+VOLUME ["/var/lib/cassandra", "/var/log/cassandra"]
 EXPOSE 9160
+
 ADD start.sh /usr/local/bin/start.sh
 CMD /usr/local/bin/start.sh
