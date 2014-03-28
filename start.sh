@@ -6,4 +6,5 @@ fi
 if [ `stat --format=%U /var/log/cassandra` != "cassandra" ] ; then
   chown -R cassandra:cassandra /var/log/cassandra
 fi
-/usr/sbin/cassandra -f
+service cassandra start
+tail -f /var/log/cassandra/output.log
