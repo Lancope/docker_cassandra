@@ -9,6 +9,8 @@ RUN apt-get update -o Dir::Etc::sourcelist="sources.list.d/cassandra.sources.lis
 RUN apt-get install -yq dsc12=1.2.15-1 cassandra=1.2.15
 RUN sed -i -e "s/^rpc_address.*/rpc_address: 0.0.0.0/" /etc/cassandra/cassandra.yaml
 
+RUN apt-get install -yq net-tools
+
 VOLUME ["/var/lib/cassandra", "/var/log/cassandra"]
 EXPOSE 9160
 
