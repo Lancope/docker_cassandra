@@ -1,4 +1,4 @@
-FROM munkyboy/java:quantal_7
+FROM lancope/java:quantal_7
 
 # add source for cassandra
 RUN echo "deb http://debian.datastax.com/community stable main" | tee -a /etc/apt/sources.list.d/cassandra.sources.list
