@@ -7,7 +7,7 @@ if [ `stat --format=%U /var/log/cassandra` != "cassandra" ] ; then
   chown -R cassandra:cassandra /var/log/cassandra
 fi
 if [ -z "$CASSANDRA_IP" ] ; then
-  CASSANDRA_IP=$(ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}')
+  CASSANDRA_IP=`hostname --ip-address`
 fi
 sed -i -e "s/^\(listen_address:\).*/\1 $CASSANDRA_IP/" /etc/cassandra/cassandra.yaml
 sed -i -e "s/^\([ ]*- seeds:\).*/\1 $CASSANDRA_IP/" /etc/cassandra/cassandra.yaml
