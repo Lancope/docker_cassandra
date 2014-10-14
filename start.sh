@@ -9,8 +9,9 @@ fi
 
 # Get container's IP
 # pass in CASSANDRA_IP to use host IP
+LOCAL_IP=`hostname --ip-address`
 if [ -z "$CASSANDRA_IP" ] ; then
-  IP=`hostname --ip-address`
+  IP="$LOCAL_IP"
 else
   IP="$CASSANDRA_IP"
 fi
@@ -28,7 +29,8 @@ else
 fi
 
 # Listen on IP:port of the container/host
-sed -i -e "s/^listen_address.*/listen_address: $IP/" /etc/cassandra/cassandra.yaml
+sed -i -e "s/^listen_address.*/listen_address: $LOCAL_IP/" /etc/cassandra/cassandra.yaml
+echo "broadcast_address: $IP" >> /etc/cassandra/cassandra.yaml
 
 # Configure Cassandra seeds
 if [ -z "$CASSANDRA_SEEDS" ]; then
