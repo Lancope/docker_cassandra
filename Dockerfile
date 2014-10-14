@@ -13,7 +13,7 @@ RUN sed -i -e "s/^rpc_address.*/rpc_address: 0.0.0.0/" /etc/cassandra/cassandra.
 RUN apt-get install -yq net-tools
 
 VOLUME ["/var/lib/cassandra", "/var/log/cassandra"]
-EXPOSE 9160
+EXPOSE 7000 7001 9160
 
 ADD start.sh /usr/local/bin/start.sh
-CMD /usr/local/bin/start.sh
+ENTRYPOINT ["/usr/local/bin/start.sh"]
